@@ -1,4 +1,5 @@
-import { Target, Heart, Rocket } from "lucide-react";
+import { Target, Heart, Rocket, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const AboutSection = () => {
   return (
@@ -46,11 +47,22 @@ export const AboutSection = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-2xl bg-gradient-card border border-border/50">
+          <div className="p-8 rounded-2xl bg-gradient-card border border-border/50 mb-8">
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               <span className="text-foreground font-semibold">SHAN Z</span> is more than just a website — it's a movement to accelerate quantum literacy in India. We aggregate the best free resources from IBM Quantum, MIT, and other leading institutions, removing the friction of endless searching. Whether you're a student exploring quantum for the first time or a professional looking to upskill, 
               <span className="text-primary font-semibold"> shanz.co.in</span> is your gateway to the quantum future.
             </p>
+          </div>
+
+          {/* Privacy Policy Link */}
+          <div className="text-center">
+            <Link 
+              to="/privacy-policy" 
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/50 bg-card/50 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 text-muted-foreground hover:text-primary"
+            >
+              <Shield className="w-5 h-5" />
+              <span className="font-medium">Privacy Policy & Content Disclaimer</span>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,23 +1,33 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Atom } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Learn", href: "#learning-paths" },
-  { name: "Resources", href: "#resources" },
-  { name: "About", href: "#about" },
+  { name: "Home", href: "#home", isHash: true },
+  { name: "Learn", href: "#learning-paths", isHash: true },
+  { name: "Resources", href: "#resources", isHash: true },
+  { name: "About", href: "#about", isHash: true },
+  { name: "Privacy Policy", href: "/privacy-policy", isHash: false },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const handleNavClick = (href: string, isHash: boolean) => {
+    if (isHash && location.pathname !== "/") {
+      // Navigate to home first, then scroll
+      window.location.href = "/" + href;
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <div className="relative">
               <Atom className="w-8 h-8 text-primary group-hover:animate-spin transition-transform" style={{ animationDuration: '3s' }} />
               <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
@@ -25,18 +35,29 @@ export const Navbar = () => {
             <span className="font-heading font-bold text-xl">
               <span className="text-gradient-quantum">SHAN Z</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
-              >
-                {link.name}
-              </a>
+              link.isHash ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleNavClick(link.href, link.isHash)}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -61,14 +82,28 @@ export const Navbar = () => {
           <div className="md:hidden py-4 border-t border-border/50 animate-fade-in">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </a>
+                link.isHash ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      handleNavClick(link.href, link.isHash);
+                      setIsOpen(false);
+                    }}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <Button variant="quantum" size="sm" className="w-full mt-2">
                 Start Learning

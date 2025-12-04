@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      newsletter_subscribers: {
+        Row: {
+          email: string
+          id: string
+          is_active: boolean
+          subscribed_at: string
+        }
+        Insert: {
+          email: string
+          id?: string
+          is_active?: boolean
+          subscribed_at?: string
+        }
+        Update: {
+          email?: string
+          id?: string
+          is_active?: boolean
+          subscribed_at?: string
+        }
+        Relationships: []
+      }
+      resource_views: {
+        Row: {
+          id: string
+          resource_id: string
+          session_id: string | null
+          viewed_at: string
+        }
+        Insert: {
+          id?: string
+          resource_id: string
+          session_id?: string | null
+          viewed_at?: string
+        }
+        Update: {
+          id?: string
+          resource_id?: string
+          session_id?: string | null
+          viewed_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

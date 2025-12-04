@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { Shield, BookOpen, Link2, Heart } from "lucide-react";
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
       <ParticleBackground />

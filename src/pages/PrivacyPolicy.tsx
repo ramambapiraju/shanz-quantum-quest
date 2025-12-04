@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
               Privacy Policy & Content Disclaimer
             </h1>
             <p className="text-muted-foreground text-lg">
-              Last updated: December 2024
+              Last updated: December 2025
             </p>
           </div>
 
@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
                 <h2 className="text-2xl font-bold text-foreground">Our Mission</h2>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                SHAN Z - The Quantum World is a <strong className="text-foreground">free, non-commercial educational platform</strong> dedicated to making quantum computing education accessible to everyone, especially students in India. We believe knowledge should be freely available, and our goal is to remove barriers to learning by curating the best resources in one place.
+                SHAN Z - The Quantum World is a <strong className="text-foreground">free educational platform</strong> dedicated to making quantum computing education accessible to everyone, especially students in India. We believe knowledge should be freely available, and our goal is to remove barriers to learning by curating the best resources in one place.
               </p>
             </section>
 

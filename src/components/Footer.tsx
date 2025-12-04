@@ -1,4 +1,5 @@
 import { Atom, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = {
   learn: [
@@ -16,7 +17,7 @@ const footerLinks = {
   connect: [
     { name: "About Us", href: "#about" },
     { name: "Contact", href: "mailto:hello@shanz.co.in" },
-    { name: "Contribute", href: "#" },
+    { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
     { name: "Feedback", href: "#" },
   ],
 };
@@ -98,12 +99,21 @@ export const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.connect.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary text-sm transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary text-sm transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground hover:text-primary text-sm transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

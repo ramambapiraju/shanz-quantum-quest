@@ -4,6 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Send, Sparkles, CheckCircle, Zap, BookOpen, Bell } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const emailSchema = z.object({
+  email: z.string()
+    .trim()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Please enter a valid email address" })
+    .max(255, { message: "Email must be less than 255 characters" })
+});
 
 export const NewsletterSection = () => {
   const [email, setEmail] = useState("");
@@ -12,23 +21,23 @@ export const NewsletterSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    
+    const result = emailSchema.safeParse({ email });
+    if (!result.success) {
       toast.error("Invalid email", {
-        description: "Please enter a valid email address.",
+        description: result.error.errors[0]?.message || "Please enter a valid email address.",
       });
       return;
     }
+    
+    const validatedEmail = result.data.email.toLowerCase();
 
     setIsLoading(true);
     
     try {
       const { error } = await supabase
         .from('newsletter_subscribers')
-        .insert({ email: email.toLowerCase().trim() });
+        .insert({ email: validatedEmail });
       
       if (error) {
         if (error.code === '23505') {

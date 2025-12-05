@@ -5,7 +5,9 @@ import { supabase } from "@/integrations/supabase/client";
 
 const categories = [
   { id: "all", name: "All Resources", icon: Atom },
-  { id: "qiskit", name: "Qiskit Official", icon: Code },
+  { id: "qiskit", name: "IBM Qiskit", icon: Code },
+  { id: "microsoft", name: "Microsoft", icon: Code },
+  { id: "google", name: "Google", icon: Code },
   { id: "videos", name: "Video Courses", icon: Video },
   { id: "tutorials", name: "Tutorials", icon: GraduationCap },
   { id: "docs", name: "Documentation", icon: FileText },
@@ -226,6 +228,142 @@ const resources = [
     tags: ["Practice", "Self-paced"],
     difficulty: "Beginner",
   },
+
+  // Microsoft Azure Quantum Resources
+  {
+    id: "azure-quantum",
+    title: "Azure Quantum Platform",
+    description: "Microsoft's cloud quantum computing service with access to diverse quantum hardware and simulators.",
+    category: "microsoft",
+    type: "platform",
+    icon: Code,
+    link: "https://azure.microsoft.com/en-us/products/quantum",
+    featured: true,
+    tags: ["Cloud", "Multi-Hardware"],
+    difficulty: "Intermediate",
+  },
+  {
+    id: "azure-quantum-docs",
+    title: "Azure Quantum Documentation",
+    description: "Comprehensive documentation for Azure Quantum, Q# programming, and quantum development kit.",
+    category: "microsoft",
+    type: "docs",
+    icon: FileText,
+    link: "https://learn.microsoft.com/en-us/azure/quantum/",
+    featured: true,
+    tags: ["Official", "Q#"],
+    difficulty: "Beginner",
+  },
+  {
+    id: "microsoft-quantum-katas",
+    title: "Quantum Katas",
+    description: "Self-paced programming exercises to learn quantum computing and Q# through hands-on practice.",
+    category: "microsoft",
+    type: "tutorial",
+    icon: GraduationCap,
+    link: "https://quantum.microsoft.com/en-us/experience/quantum-katas",
+    featured: true,
+    tags: ["Interactive", "Free"],
+    difficulty: "Beginner",
+  },
+  {
+    id: "azure-quantum-copilot",
+    title: "Azure Quantum Copilot",
+    description: "AI-assisted quantum programming with natural language to code generation capabilities.",
+    category: "microsoft",
+    type: "tool",
+    icon: Brain,
+    link: "https://quantum.microsoft.com/en-us/experience/quantum-coding",
+    featured: false,
+    tags: ["AI", "Innovative"],
+    difficulty: "Beginner",
+  },
+  {
+    id: "microsoft-quantum-learn",
+    title: "Microsoft Learn: Quantum",
+    description: "Free learning paths covering quantum concepts, Q# programming, and quantum algorithms.",
+    category: "microsoft",
+    type: "course",
+    icon: BookOpen,
+    link: "https://learn.microsoft.com/en-us/training/paths/quantum-computing-fundamentals/",
+    featured: true,
+    tags: ["Free", "Structured"],
+    difficulty: "Beginner",
+  },
+
+  // Google Quantum AI Resources
+  {
+    id: "google-quantum-ai",
+    title: "Google Quantum AI",
+    description: "Explore Google's quantum computing research, hardware breakthroughs, and the path to useful quantum computing.",
+    category: "google",
+    type: "platform",
+    icon: Atom,
+    link: "https://quantumai.google/",
+    featured: true,
+    tags: ["Research", "Cutting-edge"],
+    difficulty: "All Levels",
+  },
+  {
+    id: "cirq-framework",
+    title: "Cirq Framework",
+    description: "Google's open-source Python framework for writing, manipulating, and optimizing quantum circuits.",
+    category: "google",
+    type: "framework",
+    icon: Code,
+    link: "https://quantumai.google/cirq",
+    featured: true,
+    tags: ["Open Source", "Python"],
+    difficulty: "Intermediate",
+  },
+  {
+    id: "cirq-tutorials",
+    title: "Cirq Tutorials & Examples",
+    description: "Step-by-step tutorials and code examples for learning quantum programming with Cirq.",
+    category: "google",
+    type: "tutorial",
+    icon: GraduationCap,
+    link: "https://quantumai.google/cirq/tutorials",
+    featured: true,
+    tags: ["Hands-on", "Examples"],
+    difficulty: "Intermediate",
+  },
+  {
+    id: "tensorflow-quantum",
+    title: "TensorFlow Quantum",
+    description: "Hybrid quantum-classical machine learning library built on Cirq and TensorFlow.",
+    category: "google",
+    type: "library",
+    icon: Brain,
+    link: "https://www.tensorflow.org/quantum",
+    featured: true,
+    tags: ["ML", "Hybrid"],
+    difficulty: "Advanced",
+  },
+  {
+    id: "google-quantum-research",
+    title: "Google Quantum Research Papers",
+    description: "Access peer-reviewed research papers on quantum error correction, supremacy experiments, and more.",
+    category: "google",
+    type: "research",
+    icon: FileText,
+    link: "https://quantumai.google/research",
+    featured: false,
+    tags: ["Academic", "Papers"],
+    difficulty: "Expert",
+  },
+  {
+    id: "openfermion",
+    title: "OpenFermion",
+    description: "Open-source library for compiling and analyzing quantum algorithms for chemistry simulations.",
+    category: "google",
+    type: "library",
+    icon: Atom,
+    link: "https://quantumai.google/openfermion",
+    featured: false,
+    tags: ["Chemistry", "Open Source"],
+    difficulty: "Advanced",
+  },
 ];
 
 const difficultyColors: Record<string, string> = {
@@ -266,13 +404,13 @@ export const ResourcesSection = () => {
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium mb-4 animate-pulse">
             <Atom className="w-4 h-4" />
-            100+ Curated Resources
+            Multi-Platform Resources
           </span>
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
             Curated <span className="text-gradient-quantum">Learning Resources</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Hand-picked tutorials, official documentation, and videos from Qiskit and the quantum computing community.
+            Hand-picked tutorials from IBM Qiskit, Microsoft Azure Quantum, Google Cirq, and the global quantum computing community.
           </p>
         </div>
 
@@ -367,14 +505,34 @@ export const ResourcesSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 flex flex-wrap justify-center gap-4">
           <a 
             href="https://learning.quantum.ibm.com/" 
             target="_blank" 
             rel="noopener noreferrer"
           >
             <Button variant="outline" size="lg" className="group">
-              Explore IBM Quantum Learning
+              IBM Quantum
+              <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </a>
+          <a 
+            href="https://quantum.microsoft.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" size="lg" className="group">
+              Microsoft Quantum
+              <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </a>
+          <a 
+            href="https://quantumai.google/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" size="lg" className="group">
+              Google Quantum AI
               <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </a>

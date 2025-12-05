@@ -88,20 +88,24 @@ export const HeroSection = () => {
             </a>
           </div>
 
-          {/* Trusted By */}
+          {/* Resources Attribution */}
           <div className="mt-16 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">Powered by Official Resources from</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">Resources curated from</p>
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 opacity-60">
               <a href="https://www.ibm.com/quantum" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
-                <span className="font-heading font-bold text-lg text-foreground">IBM Quantum</span>
+                <span className="font-heading font-bold text-base md:text-lg text-foreground">IBM Quantum</span>
               </a>
               <a href="https://qiskit.org" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
-                <span className="font-heading font-bold text-lg text-foreground">Qiskit</span>
+                <span className="font-heading font-bold text-base md:text-lg text-foreground">Qiskit</span>
               </a>
-              <a href="https://learning.quantum.ibm.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
-                <span className="font-heading font-bold text-lg text-foreground">IBM Learning</span>
+              <a href="https://azure.microsoft.com/en-us/products/quantum" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+                <span className="font-heading font-bold text-base md:text-lg text-foreground">Microsoft Azure Quantum</span>
+              </a>
+              <a href="https://quantumai.google/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+                <span className="font-heading font-bold text-base md:text-lg text-foreground">Google Quantum AI</span>
               </a>
             </div>
+            <p className="text-[10px] text-muted-foreground/60 mt-4">Not affiliated with IBM, Microsoft, or Google. All trademarks belong to their respective owners.</p>
           </div>
         </div>
       </div>

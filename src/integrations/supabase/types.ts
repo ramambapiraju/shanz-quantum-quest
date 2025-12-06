@@ -14,6 +14,133 @@ export type Database = {
   }
   public: {
     Tables: {
+      game_events: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          player_id: string
+          session_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          player_id: string
+          session_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          player_id?: string
+          session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_events_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "game_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_players: {
+        Row: {
+          ammo: number
+          deaths: number
+          health: number
+          id: string
+          is_alive: boolean
+          joined_at: string
+          kills: number
+          player_id: string
+          player_name: string
+          position_x: number
+          position_y: number
+          position_z: number
+          rotation_y: number
+          session_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          ammo?: number
+          deaths?: number
+          health?: number
+          id?: string
+          is_alive?: boolean
+          joined_at?: string
+          kills?: number
+          player_id: string
+          player_name: string
+          position_x?: number
+          position_y?: number
+          position_z?: number
+          rotation_y?: number
+          session_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ammo?: number
+          deaths?: number
+          health?: number
+          id?: string
+          is_alive?: boolean
+          joined_at?: string
+          kills?: number
+          player_id?: string
+          player_name?: string
+          position_x?: number
+          position_y?: number
+          position_z?: number
+          rotation_y?: number
+          session_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_players_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "game_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_sessions: {
+        Row: {
+          created_at: string
+          host_player_id: string
+          id: string
+          max_players: number
+          session_code: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          host_player_id: string
+          id?: string
+          max_players?: number
+          session_code: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          host_player_id?: string
+          id?: string
+          max_players?: number
+          session_code?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string

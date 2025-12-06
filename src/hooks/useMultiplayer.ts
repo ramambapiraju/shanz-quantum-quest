@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { RealtimeChannel } from "@supabase/supabase-js";
+import type { Json } from "@/integrations/supabase/types";
 
 export interface Player {
   id: string;
@@ -177,7 +178,7 @@ export const useMultiplayer = () => {
     }, 50); // 50ms throttle for ~20 updates per second
   }, [playerDbId, isConnected]);
 
-  const sendGameEvent = useCallback(async (eventType: string, eventData: Record<string, unknown>) => {
+  const sendGameEvent = useCallback(async (eventType: string, eventData: { [key: string]: Json | undefined }) => {
     if (!gameSession) return;
 
     try {

@@ -7,6 +7,7 @@ const navLinks = [
   { name: "Home", href: "#home", isHash: true },
   { name: "Learn", href: "#learning-paths", isHash: true },
   { name: "Resources", href: "#resources", isHash: true },
+  { name: "Industries", href: "/industries", isHash: false },
   { name: "About", href: "#about", isHash: true },
   { name: "Play Game", href: "/quantum-collapse", isHash: false },
 ];

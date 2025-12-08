@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Users, BookOpen, Play, ExternalLink, Atom } from "lucide-react";
+import { ArrowRight, Sparkles, Users, BookOpen, Play, Atom } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -39,11 +39,10 @@ export const HeroSection = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>
-            <a href="https://www.youtube.com/playlist?list=PLOFEBzvs-VvrgHZt3exM_NNiNKtZlHvZi" target="_blank" rel="noopener noreferrer">
+            <a href="/quantum-collapse">
               <Button variant="hero-outline" size="lg" className="group text-lg h-14 px-8">
                 <Play className="w-5 h-5 mr-2" />
-                Watch Qiskit Tutorial
-                <ExternalLink className="w-4 h-4 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
+                Play Quantum Collapse
               </Button>
             </a>
           </div>

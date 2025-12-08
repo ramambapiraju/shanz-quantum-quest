@@ -1,1 +1,4 @@
 project_id = "ksxlvfrwlohcrrzyrako"
+
+[functions.industry-advisor]
+verify_jwt = false

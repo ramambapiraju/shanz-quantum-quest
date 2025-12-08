@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Learn", href: "#learning-paths", isHash: true },
   { name: "Resources", href: "#resources", isHash: true },
   { name: "About", href: "#about", isHash: true },
-  { name: "Privacy Policy", href: "/privacy-policy", isHash: false },
+  { name: "Play Game", href: "/quantum-collapse", isHash: false },
 ];
 
 export const Navbar = () => {

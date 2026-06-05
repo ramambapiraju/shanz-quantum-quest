@@ -24,6 +24,7 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <QuantumCreator />
         <LearningPaths />
         <VideoSection />
         <ResourcesSection />

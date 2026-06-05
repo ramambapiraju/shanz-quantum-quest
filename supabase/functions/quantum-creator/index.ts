@@ -126,7 +126,13 @@ Keep it accurate, interesting, and perfectly tailored. Start IMMEDIATELY with th
       if (!ttsResp.ok) {
         const t = await ttsResp.text();
         console.error("ElevenLabs error:", ttsResp.status, t);
-        return new Response(JSON.stringify({ text: lyrics, audio: null, voice: voice.name, error: "Voice generation failed" }), {
+        let friendly = "Voice generation failed";
+        try {
+          const parsed = JSON.parse(t);
+          const detailMsg = parsed?.detail?.message || parsed?.detail || parsed?.message;
+          if (typeof detailMsg === "string") friendly = `Voice service: ${detailMsg}`;
+        } catch { /* keep default */ }
+        return new Response(JSON.stringify({ text: lyrics, audio: null, voice: voice.name, error: friendly }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }

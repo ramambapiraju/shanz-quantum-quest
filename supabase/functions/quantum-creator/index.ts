@@ -131,7 +131,7 @@ Keep it accurate, interesting, and perfectly tailored. Start IMMEDIATELY with th
         });
       }
       const audioBuf = await ttsResp.arrayBuffer();
-      const audioB64 = base64Encode(new Uint8Array(audioBuf));
+      const audioB64 = encodeBase64(new Uint8Array(audioBuf));
       return new Response(JSON.stringify({ text: lyrics, audio: audioB64, voice: voice.name }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

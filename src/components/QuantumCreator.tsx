@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Sparkles, Wand2, Loader2, Film, BookOpen, Music, Feather, GraduationCap } from "lucide-react";
+import { Sparkles, Wand2, Loader2, Film, BookOpen, Music, Feather, GraduationCap, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import ReactMarkdown from "react-markdown";
 

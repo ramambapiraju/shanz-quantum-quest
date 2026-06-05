@@ -34,7 +34,7 @@ export const useMultiplayer = () => {
   const [playerDbId, setPlayerDbId] = useState<string | null>(null);
   
   const channelRef = useRef<RealtimeChannel | null>(null);
-  const updateThrottleRef = useRef<NodeJS.Timeout | null>(null);
+  const updateThrottleRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const generateSessionCode = () => {
     return Math.random().toString(36).substring(2, 8).toUpperCase();

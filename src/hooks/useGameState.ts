@@ -41,7 +41,7 @@ export const useGameState = () => {
     },
   ]);
 
-  const reloadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const reloadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const shoot = useCallback(() => {
     if (isReloading || ammo <= 0) return false;

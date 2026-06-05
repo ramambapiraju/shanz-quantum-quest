@@ -64,6 +64,22 @@ export const QuantumCreator = () => {
         setLoading(false);
         return;
       }
+
+      // SONG returns JSON with text + base64 audio
+      const contentType = resp.headers.get("content-type") || "";
+      if (style === "song" || contentType.includes("application/json")) {
+        const data = await resp.json();
+        if (data.text) setOutput(data.text);
+        if (data.voice) setVoiceName(data.voice);
+        if (data.audio) {
+          setAudioUrl(`data:audio/mpeg;base64,${data.audio}`);
+        } else if (data.error) {
+          toast.error(data.error);
+        }
+        setTimeout(() => outputRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 100);
+        return;
+      }
+
       if (!resp.body) throw new Error("No stream");
 
       const reader = resp.body.getReader();

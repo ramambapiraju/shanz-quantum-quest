@@ -1,5 +1,5 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { encode as base64Encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
+import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
 // Different ElevenLabs voices chosen to fit each creative style
 const VOICE_BY_STYLE: Record<string, { id: string; name: string }[]> = {

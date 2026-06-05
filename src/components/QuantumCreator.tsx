@@ -28,6 +28,8 @@ export const QuantumCreator = () => {
   const [duration, setDuration] = useState(3);
   const [style, setStyle] = useState<Style>("story");
   const [output, setOutput] = useState("");
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [voiceName, setVoiceName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
 

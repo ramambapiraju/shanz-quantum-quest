@@ -44,6 +44,8 @@ export const QuantumCreator = () => {
     }
     setLoading(true);
     setOutput("");
+    setAudioUrl(null);
+    setVoiceName(null);
     try {
       const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/quantum-creator`;
       const resp = await fetch(url, {

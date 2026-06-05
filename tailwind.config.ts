@@ -93,6 +93,10 @@ export default {
           "0%, 100%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.3)" },
           "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.6)" },
         },
+        "ken-burns": {
+          "0%": { transform: "scale(1) translate(0, 0)" },
+          "100%": { transform: "scale(1.15) translate(-2%, -2%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -102,6 +106,7 @@ export default {
         "fade-in-right": "fade-in-right 0.6s ease-out forwards",
         "scale-in": "scale-in 0.4s ease-out forwards",
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
+        "ken-burns": "ken-burns 10s ease-out forwards",
       },
     },
   },

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Sparkles, Wand2, Loader2, Film, BookOpen, Music, Feather, GraduationCap } from "lucide-react";
+import { Sparkles, Wand2, Loader2, Film, BookOpen, Music, Feather, GraduationCap, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import ReactMarkdown from "react-markdown";
 
@@ -28,6 +28,8 @@ export const QuantumCreator = () => {
   const [duration, setDuration] = useState(3);
   const [style, setStyle] = useState<Style>("story");
   const [output, setOutput] = useState("");
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [voiceName, setVoiceName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
 
@@ -42,6 +44,8 @@ export const QuantumCreator = () => {
     }
     setLoading(true);
     setOutput("");
+    setAudioUrl(null);
+    setVoiceName(null);
     try {
       const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/quantum-creator`;
       const resp = await fetch(url, {
@@ -60,6 +64,22 @@ export const QuantumCreator = () => {
         setLoading(false);
         return;
       }
+
+      // SONG returns JSON with text + base64 audio
+      const contentType = resp.headers.get("content-type") || "";
+      if (style === "song" || contentType.includes("application/json")) {
+        const data = await resp.json();
+        if (data.text) setOutput(data.text);
+        if (data.voice) setVoiceName(data.voice);
+        if (data.audio) {
+          setAudioUrl(`data:audio/mpeg;base64,${data.audio}`);
+        } else if (data.error) {
+          toast.error(data.error);
+        }
+        setTimeout(() => outputRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 100);
+        return;
+      }
+
       if (!resp.body) throw new Error("No stream");
 
       const reader = resp.body.getReader();
@@ -211,11 +231,22 @@ export const QuantumCreator = () => {
             )}
           </Button>
 
-          {output && (
+          {(output || audioUrl) && (
             <div ref={outputRef} className="mt-8 p-6 rounded-xl bg-background/60 border border-primary/20">
-              <div className="prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-gradient-quantum prose-strong:text-primary">
-                <ReactMarkdown>{output}</ReactMarkdown>
-              </div>
+              {audioUrl && (
+                <div className="mb-5 p-4 rounded-lg bg-primary/10 border border-primary/30">
+                  <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-primary">
+                    <Volume2 className="w-4 h-4" />
+                    Performed by {voiceName ?? "AI Voice"} 🎤
+                  </div>
+                  <audio controls autoPlay src={audioUrl} className="w-full" />
+                </div>
+              )}
+              {output && (
+                <div className="prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-gradient-quantum prose-strong:text-primary whitespace-pre-wrap">
+                  <ReactMarkdown>{output}</ReactMarkdown>
+                </div>
+              )}
             </div>
           )}
         </Card>

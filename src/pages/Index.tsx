@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { QuantumCreator } from "@/components/QuantumCreator";
 import { LearningPaths } from "@/components/LearningPaths";
 import { VideoSection } from "@/components/VideoSection";
 import { ResourcesSection } from "@/components/ResourcesSection";

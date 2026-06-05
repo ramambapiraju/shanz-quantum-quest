@@ -1,5 +1,5 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { encode as base64Encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
+import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
 // Different ElevenLabs voices chosen to fit each creative style
 const VOICE_BY_STYLE: Record<string, { id: string; name: string }[]> = {
@@ -126,12 +126,18 @@ Keep it accurate, interesting, and perfectly tailored. Start IMMEDIATELY with th
       if (!ttsResp.ok) {
         const t = await ttsResp.text();
         console.error("ElevenLabs error:", ttsResp.status, t);
-        return new Response(JSON.stringify({ text: lyrics, audio: null, voice: voice.name, error: "Voice generation failed" }), {
+        let friendly = "Voice generation failed";
+        try {
+          const parsed = JSON.parse(t);
+          const detailMsg = parsed?.detail?.message || parsed?.detail || parsed?.message;
+          if (typeof detailMsg === "string") friendly = `Voice service: ${detailMsg}`;
+        } catch { /* keep default */ }
+        return new Response(JSON.stringify({ text: lyrics, audio: null, voice: voice.name, error: friendly }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       const audioBuf = await ttsResp.arrayBuffer();
-      const audioB64 = base64Encode(new Uint8Array(audioBuf));
+      const audioB64 = encodeBase64(new Uint8Array(audioBuf));
       return new Response(JSON.stringify({ text: lyrics, audio: audioB64, voice: voice.name }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

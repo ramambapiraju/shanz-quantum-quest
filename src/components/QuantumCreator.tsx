@@ -231,11 +231,22 @@ export const QuantumCreator = () => {
             )}
           </Button>
 
-          {output && (
+          {(output || audioUrl) && (
             <div ref={outputRef} className="mt-8 p-6 rounded-xl bg-background/60 border border-primary/20">
-              <div className="prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-gradient-quantum prose-strong:text-primary">
-                <ReactMarkdown>{output}</ReactMarkdown>
-              </div>
+              {audioUrl && (
+                <div className="mb-5 p-4 rounded-lg bg-primary/10 border border-primary/30">
+                  <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-primary">
+                    <Volume2 className="w-4 h-4" />
+                    Performed by {voiceName ?? "AI Voice"} 🎤
+                  </div>
+                  <audio controls autoPlay src={audioUrl} className="w-full" />
+                </div>
+              )}
+              {output && (
+                <div className="prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-gradient-quantum prose-strong:text-primary whitespace-pre-wrap">
+                  <ReactMarkdown>{output}</ReactMarkdown>
+                </div>
+              )}
             </div>
           )}
         </Card>

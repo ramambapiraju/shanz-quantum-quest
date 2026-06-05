@@ -23,8 +23,8 @@ const Index = () => {
       <ParticleBackground />
       <Navbar />
       <main>
-        <HeroSection />
         <QuantumCreator />
+        <HeroSection />
         <LearningPaths />
         <VideoSection />
         <ResourcesSection />
